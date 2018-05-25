@@ -85,7 +85,7 @@ end
 
 #OPTIONAL
 
-#1st test
+#1st, 2nd test
 def customer_can_afford_pet(customer, wanted_pet)
   customer_cash(customer) >= wanted_pet[:price]
 end
