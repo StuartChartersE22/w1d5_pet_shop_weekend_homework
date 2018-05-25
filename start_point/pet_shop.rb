@@ -92,7 +92,7 @@ end
 
 #3rd test
 def sell_pet_to_customer(pet_shop_details, wanted_pet, customer)
-  return if wanted_pet == nil
+  return if wanted_pet == nil || !customer_can_afford_pet(customer, wanted_pet)
   add_pet_to_customer(customer, wanted_pet)
   remove_customer_cash(customer, wanted_pet[:price])
   add_or_remove_cash(pet_shop_details, wanted_pet[:price])
