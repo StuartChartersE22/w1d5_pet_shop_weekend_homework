@@ -72,3 +72,8 @@ end
 def remove_customer_cash(customer, amount_to_change_by)
   customer[:cash] -= amount_to_change_by
 end
+
+#16th test
+def customer_pet_count(customer)
+  return customer[:pets].length()
+end
