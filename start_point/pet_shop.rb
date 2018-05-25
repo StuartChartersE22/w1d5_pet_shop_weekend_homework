@@ -13,3 +13,7 @@ end
 def pets_sold(pet_shop_details)
   return pet_shop_details[:admin][:pets_sold]
 end
+
+def increase_pets_sold(pet_shop_details,amount_to_change_by)
+  pet_shop_details[:admin][:pets_sold] += amount_to_change_by
+end
