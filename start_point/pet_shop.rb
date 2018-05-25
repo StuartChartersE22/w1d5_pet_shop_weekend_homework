@@ -78,6 +78,14 @@ def customer_pet_count(customer)
   return customer[:pets].length()
 end
 
+#17th test
 def add_pet_to_customer(customer, pet_to_add)
   customer[:pets].push(pet_to_add)
+end
+
+#OPTIONAL
+
+#1st test
+def customer_can_afford_pet(customer, wanted_pet)
+  customer_cash(customer) >= wanted_pet[:price]
 end
