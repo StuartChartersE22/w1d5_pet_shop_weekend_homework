@@ -66,7 +66,9 @@ class TestPetShop < Minitest::Test
         ],
         admin: {
           total_cash: 1000,
-          pets_sold: 0,
+          # My Notes: removed as sold_pets array superseeds
+          #pets_sold: 0,
+          sold_pets: []
         },
         name: "Camelot of Pets"
       }
@@ -99,11 +101,12 @@ class TestPetShop < Minitest::Test
     assert_equal(0, sold)
   end
 
-  def test_indexing_pets_sold
-    indexing_pets_sold(@pet_shop,2)
-    sold = pets_sold(@pet_shop)
-    assert_equal(2, sold)
-  end
+  # My Note: not needed as sold_pets.length() would reflect the number of pets sold as long as array updated (which it should be)
+  # def test_indexing_pets_sold
+  #   indexing_pets_sold(@pet_shop,2)
+  #   sold = pets_sold(@pet_shop)
+  #   assert_equal(2, sold)
+  # end
 
   def test_stock_count
     count = stock_count(@pet_shop)
@@ -184,17 +187,21 @@ class TestPetShop < Minitest::Test
 
   # My Note: Problem with original test, not testing that the pet has been taken from the pet shop stock.
   #added assert_equal(5, stock_count(@pet_shop))
+
+  # My Note: Added array of sold pets so customers can return pets later but can be tested here as well.
+
   def test_sell_pet_to_customer__pet_found
     customer = @customers[0]
     pet = find_pet_by_name(@pet_shop,"Arthur")
-
     sell_pet_to_customer(@pet_shop, pet, customer)
+    list_of_pets_sold = @pet_shop[:admin][:sold_pets]
 
     assert_equal(1, customer_pet_count(customer))
     assert_equal(1, pets_sold(@pet_shop))
     assert_equal(100, customer_cash(customer))
     assert_equal(1900, total_cash(@pet_shop))
     assert_equal(5, stock_count(@pet_shop))
+    assert_equal(1, list_of_pets_sold.length)
   end
 
   def test_sell_pet_to_customer__pet_not_found
@@ -221,6 +228,7 @@ class TestPetShop < Minitest::Test
     assert_equal(50, customer_cash(customer))
     assert_equal(1000, total_cash(@pet_shop))
     assert_equal(6, stock_count(@pet_shop))
+
   end
 
   #Made up tests
@@ -244,6 +252,18 @@ class TestPetShop < Minitest::Test
     pet = find_pet_by_name(@pet_shop,"Arthur")
     sell_pet_to_customer(@pet_shop, pet, customer)
     customer_returning_pet(@pet_shop, pet, customer)
+    assert_equal(0, customer_pet_count(customer))
+    assert_equal(0, pets_sold(@pet_shop))
+    assert_equal(1000, customer_cash(customer))
+    assert_equal(1000, total_cash(@pet_shop))
+    assert_equal(6, stock_count(@pet_shop))
+  end
+
+  #Customer tries to return pet not bought from store
+  def test_customer_returning_pet__not_bought
+    customer = @customers[0]
+    add_pet_to_owner(customer, @new_pet)
+    customer_returning_pet(@pet_shop, @new_pet, customer)
     assert_equal(0, customer_pet_count(customer))
     assert_equal(0, pets_sold(@pet_shop))
     assert_equal(1000, customer_cash(customer))
