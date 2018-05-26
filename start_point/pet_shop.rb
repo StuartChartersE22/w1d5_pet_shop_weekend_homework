@@ -97,6 +97,7 @@ def sell_pet_to_customer(pet_shop_details, wanted_pet, customer)
   remove_customer_cash(customer, wanted_pet[:price])
   add_or_remove_cash(pet_shop_details, wanted_pet[:price])
   indexing_pets_sold(pet_shop_details,1)
+  remove_pet_by_name(pet_shop_details, wanted_pet[:name])
 end
 
 #Made up tests
