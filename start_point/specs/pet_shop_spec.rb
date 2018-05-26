@@ -181,7 +181,8 @@ class TestPetShop < Minitest::Test
 
   # #These are 'integration' tests so we want multiple asserts.
   # #If one fails the entire test should fail
-  # Problem with original test, not testing that the pet has been taken from the pet shop stock.
+
+  # My Note: Problem with original test, not testing that the pet has been taken from the pet shop stock.
   #added assert_equal(5, stock_count(@pet_shop))
   def test_sell_pet_to_customer__pet_found
     customer = @customers[0]
@@ -238,14 +239,16 @@ class TestPetShop < Minitest::Test
   end
 
   #Customer returns pet
-  # def test_customer_returning_pet
-  #   customer = @customers[0]
-  #   customers_pets = sell_pet_to_customer(@pet_shop, customer,"Arthur")
-  #   customer_returning_pet(@pet_shop, "Arthur", customer)
-  #   assert_equal(0, customer_pet_count(customer))
-  #   assert_equal(0, pets_sold(@pet_shop))
-  #   assert_equal(1000, customer_cash(customer))
-  #   assert_equal(1000, total_cash(@pet_shop))
-  # end
+  def test_customer_returning_pet
+    customer = @customers[0]
+    pet = find_pet_by_name(@pet_shop,"Arthur")
+    sell_pet_to_customer(@pet_shop, pet, customer)
+    customer_returning_pet(@pet_shop, pet, customer)
+    assert_equal(0, customer_pet_count(customer))
+    assert_equal(0, pets_sold(@pet_shop))
+    assert_equal(1000, customer_cash(customer))
+    assert_equal(1000, total_cash(@pet_shop))
+    assert_equal(6, stock_count(@pet_shop))
+  end
 
 end

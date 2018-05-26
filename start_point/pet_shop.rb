@@ -63,7 +63,7 @@ end
 #   pet_shop_details[:pets].push(pet_to_add)
 # end
 
-#Refactoring to 13th and 17th test passed by:
+#Refactoring to 13th and 17th so test passed by:
 def add_pet_to_owner(owner, pet_to_add)
   owner[:pets].push(pet_to_add)
 end
@@ -87,7 +87,7 @@ end
 
 #1st, 2nd test
 def customer_can_afford_pet(customer, wanted_pet)
-  customer_cash(customer) >= wanted_pet[:price]
+  customer[:cash] >= wanted_pet[:price]
 end
 
 #3rd, 4th, 5th test
@@ -113,9 +113,9 @@ def customers_affordable_pets(pet_shop_details,customer)
 end
 
 #customer returning pet
-
-# def customer_returning_pet(pet_shop_details, pet_to_return, customer)
-#   remove_pet_by_name(customer,pet_to_return)
-#   remove_customer_cash(customer, -pet_to_return[:price])
-#   add_or_remove_cash(pet_shop_details, -pet_to_return[:price])
-# end
+def customer_returning_pet(pet_shop_details, pet_to_return, customer)
+  remove_pet_by_name(customer,pet_to_return[:name])
+  remove_customer_cash(customer, -pet_to_return[:price])
+  add_or_remove_cash(pet_shop_details, -pet_to_return[:price])
+  indexing_pets_sold(pet_shop_details, -1)
+end
