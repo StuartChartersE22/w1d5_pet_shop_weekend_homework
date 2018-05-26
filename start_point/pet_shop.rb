@@ -19,7 +19,7 @@ def pets_sold(pet_shop_details)
 end
 
 #6th test
-def increase_pets_sold(pet_shop_details,amount_to_change_by)
+def indexing_pets_sold(pet_shop_details,amount_to_change_by)
   pet_shop_details[:admin][:pets_sold] += amount_to_change_by
 end
 
@@ -59,8 +59,13 @@ def remove_pet_by_name(owner, name_to_remove)
 end
 
 #13th test
-def add_pet_to_stock(pet_shop_details, pet_to_add)
-  pet_shop_details[:pets].push(pet_to_add)
+# def add_pet_to_stock(pet_shop_details, pet_to_add)
+#   pet_shop_details[:pets].push(pet_to_add)
+# end
+
+#Refactoring to 13th and 17th test passed by:
+def add_pet_to_owner(owner, pet_to_add)
+  owner[:pets].push(pet_to_add)
 end
 
 #14th test
@@ -78,11 +83,6 @@ def customer_pet_count(customer)
   return customer[:pets].length()
 end
 
-#17th test
-def add_pet_to_customer(customer, pet_to_add)
-  customer[:pets].push(pet_to_add)
-end
-
 #OPTIONAL
 
 #1st, 2nd test
@@ -93,10 +93,10 @@ end
 #3rd, 4th, 5th test
 def sell_pet_to_customer(pet_shop_details, wanted_pet, customer)
   return if wanted_pet == nil || !customer_can_afford_pet(customer, wanted_pet)
-  add_pet_to_customer(customer, wanted_pet)
+  add_pet_to_owner(customer, wanted_pet)
   remove_customer_cash(customer, wanted_pet[:price])
   add_or_remove_cash(pet_shop_details, wanted_pet[:price])
-  increase_pets_sold(pet_shop_details,1)
+  indexing_pets_sold(pet_shop_details,1)
 end
 
 #Made up tests
@@ -114,5 +114,7 @@ end
 #customer returning pet
 
 # def customer_returning_pet(pet_shop_details, pet_to_return, customer)
-#   remove
+#   remove_pet_by_name(customer,pet_to_return)
+#   remove_customer_cash(customer, -pet_to_return[:price])
+#   add_or_remove_cash(pet_shop_details, -pet_to_return[:price])
 # end
