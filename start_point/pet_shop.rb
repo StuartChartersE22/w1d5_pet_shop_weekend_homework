@@ -87,14 +87,14 @@ end
 #OPTIONAL
 
 #1st, 2nd test
-def customer_can_afford_pet(customer, wanted_pet)
+def can_customer_afford_pet?(customer, wanted_pet)
   customer[:cash] >= wanted_pet[:price]
 end
 
 #3rd, 4th, 5th test
 
 def sell_pet_to_customer(pet_shop_details, wanted_pet, customer)
-  return if wanted_pet == nil || !customer_can_afford_pet(customer, wanted_pet)
+  return if wanted_pet == nil || !can_customer_afford_pet?(customer, wanted_pet)
   add_pet_to_owner(customer, wanted_pet)
   remove_customer_cash(customer, wanted_pet[:price])
   add_or_remove_cash(pet_shop_details, wanted_pet[:price])
@@ -107,7 +107,7 @@ end
 def customers_affordable_pets(pet_shop_details,customer)
   affordable_pets = []
   for pet in pet_shop_details[:pets]
-    if customer_can_afford_pet(customer,pet)
+    if can_customer_afford_pet?(customer,pet)
       affordable_pets.push(pet)
     end
   end
@@ -115,7 +115,17 @@ def customers_affordable_pets(pet_shop_details,customer)
 end
 
 #customer returning pet
+def was_pet_bought?(pet_shop_details, pet_to_check)
+  for pet in pet_shop_details[:admin][:sold_pets]
+    if pet[:name] == pet_to_check[:name] && pet[:breed] == pet_to_check[:breed]
+      return true
+    end
+  end
+  return false
+end
+
 def customer_returning_pet(pet_shop_details, pet_to_return, customer)
+return if !was_pet_bought?(pet_shop_details, pet_to_return)
   remove_pet_by_name(customer,pet_to_return[:name])
   remove_customer_cash(customer, -pet_to_return[:price])
   add_or_remove_cash(pet_shop_details, -pet_to_return[:price])

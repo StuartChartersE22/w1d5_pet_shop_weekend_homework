@@ -170,15 +170,15 @@ class TestPetShop < Minitest::Test
 
   # # OPTIONAL
 
-  def test_customer_can_afford_pet__insufficient_funds
+  def test_can_customer_afford_pet__insufficient_funds
     customer = @customers[1]
-    can_buy_pet = customer_can_afford_pet(customer, @new_pet)
+    can_buy_pet = can_customer_afford_pet?(customer, @new_pet)
     assert_equal(false, can_buy_pet)
   end
 
-  def test_customer_can_afford_pet__sufficient_funds
+  def test_can_customer_afford_pet__sufficient_funds
     customer = @customers[0]
-    can_buy_pet = customer_can_afford_pet(customer, @new_pet)
+    can_buy_pet = can_customer_afford_pet?(customer, @new_pet)
     assert_equal(true, can_buy_pet)
   end
 
@@ -260,15 +260,17 @@ class TestPetShop < Minitest::Test
   end
 
   #Customer tries to return pet not bought from store
-  # def test_customer_returning_pet__not_bought
-  #   customer = @customers[0]
-  #   add_pet_to_owner(customer, @new_pet)
-  #   customer_returning_pet(@pet_shop, @new_pet, customer)
-  #   assert_equal(0, customer_pet_count(customer))
-  #   assert_equal(1000, customer_cash(customer))
-  #   assert_equal(1000, total_cash(@pet_shop))
-  #   assert_equal(6, stock_count(@pet_shop))
-  #   assert_equal(0, list_of_pets_sold.length())
-  # end
+  def test_customer_returning_pet__not_bought
+    customer = @customers[0]
+    add_pet_to_owner(customer, @new_pet)
+    customer_returning_pet(@pet_shop, @new_pet, customer)
+    list_of_pets_sold = @pet_shop[:admin][:sold_pets]
+
+    assert_equal(1, customer_pet_count(customer))
+    assert_equal(1000, customer_cash(customer))
+    assert_equal(1000, total_cash(@pet_shop))
+    assert_equal(6, stock_count(@pet_shop))
+    assert_equal(0, list_of_pets_sold.length())
+  end
 
 end
