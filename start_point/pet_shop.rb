@@ -29,9 +29,9 @@ def stock_count(pet_shop_details)
 end
 
 #8th, 9th test
-def pets_by_breed(pet_shop_details, breed_to_be_found)
+def pets_by_breed(owner, breed_to_be_found)
   collection_of_pets = []
-  for pet in pet_shop_details[:pets]
+  for pet in owner[:pets]
     if pet[:breed] == breed_to_be_found
       collection_of_pets.push(pet)
     end
@@ -40,8 +40,8 @@ def pets_by_breed(pet_shop_details, breed_to_be_found)
 end
 
 #10th, 11th test
-def find_pet_by_name(pet_shop_details, name_to_be_found)
-  for pet in pet_shop_details[:pets]
+def find_pet_by_name(owner, name_to_be_found)
+  for pet in owner[:pets]
     if pet[:name] == name_to_be_found
       return pet
     end
@@ -50,10 +50,10 @@ def find_pet_by_name(pet_shop_details, name_to_be_found)
 end
 
 #12th test
-def remove_pet_by_name(pet_shop_details, name_to_remove)
-  for pet in pet_shop_details[:pets]
+def remove_pet_by_name(owner, name_to_remove)
+  for pet in owner[:pets]
     if pet[:name] == name_to_remove
-      pet_shop_details[:pets].delete(pet)
+      owner[:pets].delete(pet)
     end
   end
 end
@@ -111,6 +111,8 @@ def customers_affordable_pets(pet_shop_details,customer)
   return affordable_pets
 end
 
-def customer_returning_pet(pet_shop_details, pet_to_return, customer)
+#customer returning pet
 
-end
+# def customer_returning_pet(pet_shop_details, pet_to_return, customer)
+#   remove
+# end
