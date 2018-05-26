@@ -24,7 +24,7 @@ end
 #   pet_shop_details[:admin][:pets_sold] += amount_to_change_by
 # end
 
-#7th, 16th refactored for to be passed by
+#7th, 16th refactored to be passed by:
 
 def owner_pet_count(owner)
   return owner[:pets].length()
@@ -118,7 +118,7 @@ def was_pet_bought?(pet_shop_details, pet_to_check)
 end
 
 def customer_returning_pet(pet_shop_details, pet_to_return, customer)
-return if !was_pet_bought?(pet_shop_details, pet_to_return)
+  return if !was_pet_bought?(pet_shop_details, pet_to_return)
   remove_pet_by_name(customer,pet_to_return[:name])
   remove_customer_cash(customer, -pet_to_return[:price])
   add_or_remove_cash(pet_shop_details, -pet_to_return[:price])

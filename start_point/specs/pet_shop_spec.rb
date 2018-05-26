@@ -66,7 +66,7 @@ class TestPetShop < Minitest::Test
         ],
         admin: {
           total_cash: 1000,
-          # My Notes: removed as sold_pets array superseeds
+          # My Note: removed as sold_pets array superseeds
           #pets_sold: 0,
           sold_pets: []
         },
