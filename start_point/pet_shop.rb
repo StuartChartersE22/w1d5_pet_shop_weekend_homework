@@ -118,4 +118,5 @@ def customer_returning_pet(pet_shop_details, pet_to_return, customer)
   remove_customer_cash(customer, -pet_to_return[:price])
   add_or_remove_cash(pet_shop_details, -pet_to_return[:price])
   indexing_pets_sold(pet_shop_details, -1)
+  add_pet_to_owner(pet_shop_details, pet_to_return)
 end
