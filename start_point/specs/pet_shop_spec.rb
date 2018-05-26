@@ -217,4 +217,11 @@ class TestPetShop < Minitest::Test
     assert_equal(1000, total_cash(@pet_shop))
   end
 
+  #Made up tests
+  #What pets can the customer afford?
+  def test_pets_customer_can_afford
+    customer = @customers[0]
+    affordable_pets = customers_affordable_pets(@pet_shop,customer)
+    assert_equal(5,affordable_pets.length())
+  end
 end
