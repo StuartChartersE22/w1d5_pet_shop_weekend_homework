@@ -101,3 +101,11 @@ end
 
 #Made up tests
 #What pets can the customer afford?
+def customers_affordable_pets(pet_shop_details,customer)
+  affordable_pets = []
+  for pet in pet_shop_details[:pets]
+    if customer_can_afford_pet(customer,pet)
+      affordable_pets.push(pet)
+    end
+  end
+end
