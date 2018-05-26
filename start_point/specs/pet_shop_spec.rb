@@ -224,4 +224,11 @@ class TestPetShop < Minitest::Test
     affordable_pets = customers_affordable_pets(@pet_shop,customer)
     assert_equal(5,affordable_pets.length())
   end
+
+  #Customer can't afford any pets
+  def test_pets_customer_can_afford
+    customer = @customers[1]
+    affordable_pets = customers_affordable_pets(@pet_shop,customer)
+    assert_equal(0,affordable_pets.length())
+  end
 end
