@@ -108,8 +108,8 @@ class TestPetShop < Minitest::Test
   #   assert_equal(2, sold)
   # end
 
-  def test_stock_count
-    count = stock_count(@pet_shop)
+  def test_owner_pet_count
+    count = owner_pet_count(@pet_shop)
     assert_equal(6, count)
   end
 
@@ -141,7 +141,7 @@ class TestPetShop < Minitest::Test
 
   def test_add_pet_to_stock
     add_pet_to_owner(@pet_shop, @new_pet)
-    count = stock_count(@pet_shop)
+    count = owner_pet_count(@pet_shop)
     assert_equal(7, count)
   end
 
@@ -157,15 +157,15 @@ class TestPetShop < Minitest::Test
     assert_equal(900, customer[:cash])
   end
 
-  def test_customer_pet_count
-    count = customer_pet_count(@customers[0])
+  def test_owner_pet_count
+    count = owner_pet_count(@customers[0])
     assert_equal(0, count)
   end
 
   def test_add_pet_to_customer
     customer = @customers[0]
     add_pet_to_owner(customer, @new_pet)
-    assert_equal(1, customer_pet_count(customer))
+    assert_equal(1, owner_pet_count(customer))
   end
 
   # # OPTIONAL
@@ -186,7 +186,7 @@ class TestPetShop < Minitest::Test
   # #If one fails the entire test should fail
 
   # My Note: Problem with original test, not testing that the pet has been taken from the pet shop stock.
-  #added assert_equal(5, stock_count(@pet_shop))
+  #added assert_equal(5, owner_pet_count(@pet_shop))
 
   # My Note: Added array of sold pets so customers can return pets later but can be tested here as well.
 
@@ -196,10 +196,10 @@ class TestPetShop < Minitest::Test
     sell_pet_to_customer(@pet_shop, pet, customer)
     list_of_pets_sold = @pet_shop[:admin][:sold_pets]
 
-    assert_equal(1, customer_pet_count(customer))
+    assert_equal(1, owner_pet_count(customer))
     assert_equal(100, customer_cash(customer))
     assert_equal(1900, total_cash(@pet_shop))
-    assert_equal(5, stock_count(@pet_shop))
+    assert_equal(5, owner_pet_count(@pet_shop))
     assert_equal(1, list_of_pets_sold.length())
   end
 
@@ -209,10 +209,10 @@ class TestPetShop < Minitest::Test
     list_of_pets_sold = @pet_shop[:admin][:sold_pets]
     sell_pet_to_customer(@pet_shop, pet, customer)
 
-    assert_equal(0, customer_pet_count(customer))
+    assert_equal(0, owner_pet_count(customer))
     assert_equal(1000, customer_cash(customer))
     assert_equal(1000, total_cash(@pet_shop))
-    assert_equal(6, stock_count(@pet_shop))
+    assert_equal(6, owner_pet_count(@pet_shop))
     assert_equal(0, list_of_pets_sold.length())
   end
 
@@ -222,10 +222,10 @@ class TestPetShop < Minitest::Test
     list_of_pets_sold = @pet_shop[:admin][:sold_pets]
     sell_pet_to_customer(@pet_shop, pet, customer)
 
-    assert_equal(0, customer_pet_count(customer))
+    assert_equal(0, owner_pet_count(customer))
     assert_equal(50, customer_cash(customer))
     assert_equal(1000, total_cash(@pet_shop))
-    assert_equal(6, stock_count(@pet_shop))
+    assert_equal(6, owner_pet_count(@pet_shop))
     assert_equal(0, list_of_pets_sold.length())
   end
 
@@ -252,24 +252,24 @@ class TestPetShop < Minitest::Test
     customer_returning_pet(@pet_shop, pet, customer)
     list_of_pets_sold = @pet_shop[:admin][:sold_pets]
 
-    assert_equal(0, customer_pet_count(customer))
+    assert_equal(0, owner_pet_count(customer))
     assert_equal(1000, customer_cash(customer))
     assert_equal(1000, total_cash(@pet_shop))
-    assert_equal(6, stock_count(@pet_shop))
+    assert_equal(6, owner_pet_count(@pet_shop))
     assert_equal(0, list_of_pets_sold.length())
   end
 
-  #Customer tries to return pet not bought from store
+  #Customer tries to return pet that isn't bought from store
   def test_customer_returning_pet__not_bought
     customer = @customers[0]
     add_pet_to_owner(customer, @new_pet)
     customer_returning_pet(@pet_shop, @new_pet, customer)
     list_of_pets_sold = @pet_shop[:admin][:sold_pets]
 
-    assert_equal(1, customer_pet_count(customer))
+    assert_equal(1, owner_pet_count(customer))
     assert_equal(1000, customer_cash(customer))
     assert_equal(1000, total_cash(@pet_shop))
-    assert_equal(6, stock_count(@pet_shop))
+    assert_equal(6, owner_pet_count(@pet_shop))
     assert_equal(0, list_of_pets_sold.length())
   end
 

@@ -24,10 +24,12 @@ end
 #   pet_shop_details[:admin][:pets_sold] += amount_to_change_by
 # end
 
-#7th test
-def stock_count(pet_shop_details)
-  return pet_shop_details[:pets].length()
+#7th, 16th refactored for to be passed by
+
+def owner_pet_count(owner)
+  return owner[:pets].length()
 end
+
 
 #8th, 9th test
 def pets_by_breed(owner, breed_to_be_found)
@@ -59,11 +61,6 @@ def remove_pet_by_name(owner, name_to_remove)
   end
 end
 
-#13th test
-# def add_pet_to_stock(pet_shop_details, pet_to_add)
-#   pet_shop_details[:pets].push(pet_to_add)
-# end
-
 #Refactoring to 13th and 17th so test passed by:
 def add_pet_to_owner(owner, pet_to_add)
   owner[:pets].push(pet_to_add)
@@ -79,10 +76,6 @@ def remove_customer_cash(customer, amount_to_change_by)
   customer[:cash] -= amount_to_change_by
 end
 
-#16th test
-def customer_pet_count(customer)
-  return customer[:pets].length()
-end
 
 #OPTIONAL
 
