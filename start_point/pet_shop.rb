@@ -110,3 +110,7 @@ def customers_affordable_pets(pet_shop_details,customer)
   end
   return affordable_pets
 end
+
+def customer_returning_pet(pet_shop_details, pet_to_return, customer)
+
+end

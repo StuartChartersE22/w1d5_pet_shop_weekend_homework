@@ -231,4 +231,15 @@ class TestPetShop < Minitest::Test
     affordable_pets = customers_affordable_pets(@pet_shop,customer)
     assert_equal(0,affordable_pets.length())
   end
+
+  #Customer returns pet
+  def test_customer_returning_pet
+    customer = @customers[0]
+    customers_pets = sell_pet_to_customer(@pet_shop, customer,"Arthur")
+    customer_returning_pet(@pet_shop, "Arthur", customer)
+    assert_equal(0, customer_pet_count(customer))
+    assert_equal(0, pets_sold(@pet_shop))
+    assert_equal(1000, customer_cash(customer))
+    assert_equal(1000, total_cash(@pet_shop))
+  end
 end
