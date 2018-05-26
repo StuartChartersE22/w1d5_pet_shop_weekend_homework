@@ -19,9 +19,10 @@ def pets_sold(pet_shop_details)
 end
 
 #6th test
-def indexing_pets_sold(pet_shop_details,amount_to_change_by)
-  pet_shop_details[:admin][:pets_sold] += amount_to_change_by
-end
+# My Note: not needed as sold_pets.length() would reflect the number of pets sold as long as array updated (which it should be)
+# def indexing_pets_sold(pet_shop_details,amount_to_change_by)
+#   pet_shop_details[:admin][:pets_sold] += amount_to_change_by
+# end
 
 #7th test
 def stock_count(pet_shop_details)
@@ -98,7 +99,7 @@ def sell_pet_to_customer(pet_shop_details, wanted_pet, customer)
   remove_customer_cash(customer, wanted_pet[:price])
   add_or_remove_cash(pet_shop_details, wanted_pet[:price])
   remove_pet_by_name(pet_shop_details, wanted_pet[:name])
-  pet_shop_details[:sold_pets].push(wanted_pet)
+  pet_shop_details[:admin][:sold_pets].push(wanted_pet)
 end
 
 #Made up tests
@@ -115,9 +116,9 @@ end
 
 #customer returning pet
 def customer_returning_pet(pet_shop_details, pet_to_return, customer)
-
   remove_pet_by_name(customer,pet_to_return[:name])
   remove_customer_cash(customer, -pet_to_return[:price])
   add_or_remove_cash(pet_shop_details, -pet_to_return[:price])
   add_pet_to_owner(pet_shop_details, pet_to_return)
+  pet_shop_details[:admin][:sold_pets].delete(pet_to_return)
 end
