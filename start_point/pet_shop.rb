@@ -108,4 +108,5 @@ def customers_affordable_pets(pet_shop_details,customer)
       affordable_pets.push(pet)
     end
   end
+  return affordable_pets
 end
